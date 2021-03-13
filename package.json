@@ -1,0 +1,23 @@
+{
+  "name": "ib-db-api",
+  "version": "1.0.0",
+  "description": "NodeJS Express API server connected to Azure Cosmos DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycampus-project/idea-barrel-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mycampus-project/idea-barrel-backend/issues"
+  },
+  "homepage": "https://github.com/mycampus-project/idea-barrel-backend#readme",
+  "dependencies": {
+    "@azure/cosmos": "^3.10.3",
+    "express": "^4.17.1"
+  }
+}
