@@ -1,5 +1,12 @@
-const config = require("./config");
+const config = require("../config");
 
-const { eventsContainerId } = config;
+const db = require("./database");
+
+const helpers = require("./helper-functions");
+
+const { statusMsg } = helpers();
+
+
+const { eventsContainerId , postsPartition } = config;
 
 

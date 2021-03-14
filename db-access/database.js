@@ -1,6 +1,6 @@
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 
-const config = require("./config");
+const config = require("../config");
 
 require("dotenv").config();
 
@@ -66,6 +66,7 @@ const getByQuery = async (containerId, query, cb) => {
   }
 };
 
+// TODO: ID validity check!!!!
 const postToContainer = async (containerId, data, cb) => {
   try {
     const { resource: createdItem } = await containerById(
@@ -98,4 +99,12 @@ const deleteById = async (containerId, id, partition, cb) => {
   } catch (e) {
     cb(statusMsg(400, { errorMsg: e }));
   }
+};
+
+module.exports = {
+  getAll,
+  getByQuery,
+  postToContainer,
+  updateById,
+  deleteById,
 };
