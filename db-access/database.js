@@ -1,8 +1,12 @@
+require("dotenv").config();
+
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 
 const config = require("../config");
 
-require("dotenv").config();
+const helpers = require("./helper-functions");
+
+const { statusMsg } = helpers;
 
 const {
   endpoint,
@@ -29,13 +33,6 @@ const selectAll = {
 
 const containerById = (id) => {
   return database.container(id);
-};
-
-const statusMsg = (status, data) => {
-  return {
-    status,
-    data,
-  };
 };
 
 const getAll = async (containerId, cb) => {
