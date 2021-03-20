@@ -8,7 +8,7 @@ const ideasRoutes = require("./routes/ideas.js");
 const bulletinsRoutes = require("./routes/bulletins.js");
 
 const app = express();
-const PORT = 4200;
+const PORT = process.env.PORT || 4200;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,7 +17,9 @@ const devApiKey = process.env.DEV_API_KEY;
 
 app.get("*", (req, res, next) => {
   // Ghetto authentication
-  if (req.headers.dev_token == devApiKey) {
+  const token = req.headers.dev_token;
+  console.log(token);
+  if (token == devApiKey) {
     return next();
   } else {
     res.sendStatus(404);
