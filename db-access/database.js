@@ -3,7 +3,6 @@ require("dotenv").config();
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 
 const config = require("../config");
-
 const helpers = require("./helper-functions");
 
 const { statusMsg } = helpers;
@@ -12,20 +11,11 @@ const {
   endpoint,
   key,
   databaseId,
-  // usersContainerId,
-  // bulletinsContainerId,
-  // eventsContainerId,
-  // ideasContainerId,
 } = config;
 
 const client = new CosmosClient({ endpoint, key });
 
 const database = client.database(databaseId);
-
-// const containerUsers = database.container(usersContainerId);
-// const containerEvents = database.container(eventsContainerId);
-// const containerIdeas = database.container(ideasContainerId);
-// const containerBulletins = database.container(bulletinsContainerId);
 
 const selectAll = {
   query: "SELECT * from c",
@@ -54,9 +44,6 @@ const getByQuery = async (containerId, query, cb) => {
     const { resources: items } = await containerById(containerId)
       .items.query(query)
       .fetchAll();
-    // items.forEach((item) => {
-    //   console.log(`${item.id} - ${item.email}`);
-    // });
     cb(statusMsg(200, items));
   } catch (e) {
     cb(statusMsg(404, { errorMsg: e }));
@@ -87,10 +74,12 @@ const updateById = async (containerId, newItem, cb) => {
   }
 };
 
-const deleteById = async (containerId, id, partition, cb) => {
+// Deletes an item by id. In addition to the id argument, requires another
+// argument: "partitionValue" that is used as a partition key in Cosmos DB.
+const deleteById = async (containerId, id, partitionValue, cb) => {
   try {
     const { resource: result } = await containerById(containerId)
-      .item(id, partition)
+      .item(id, partitionValue)
       .delete();
     cb(statusMsg(200, result));
   } catch (e) {

@@ -1,24 +1,38 @@
+// Some basic SQL- CRUD queries used in every db module.
+
 const selectByCategory = (category) => {
-  return query(`SELECT * from c where c.category=${category}`);
+  return query(
+    `SELECT * from c where c.category = @category`,
+    parameter("@category", category)
+  );
 };
 
-const userQueries = () => {
-  const selectByEmail = (email) => {
-    return query(`SELECT * from c where c.email=${email}`);
-  };
-
-  const selectById = (id) => {
-    return query(`SELECT * from c where c.id=${id}`);
-  };
+const selectUserByEmail = (email) => {
+  return query(
+    `SELECT * from c where c.email = @email`,
+    parameter("@email", email)
+  );
 };
 
-const eventQueries = () => {};
+const selectById = (id) => {
+  return query(`SELECT * from c where c.id = @id`, parameter("@id", id));
+};
+const deleteById = (id) => {
+  return query(`DELETE from c where c.id = @id`, parameter("@id", id));
+};
 
-const ideaQueries = () => {};
+// A query syntax Cosmos DB accepts. The parameters are for preventing SQL injection.
+const query = (queryStr, params) => {
+  return { query: queryStr, parameters: [params] };
+};
 
-const bulletinQueries = () => {};
+const parameter = (name, value) => {
+  return { name: name, value: value };
+};
 
-// Turn string into query object to eliminate most repetition
-const query = (queryStr) => {
-  return { query: queryStr };
+module.exports = {
+  selectByCategory,
+  selectUserByEmail,
+  selectById,
+  deleteById,
 };

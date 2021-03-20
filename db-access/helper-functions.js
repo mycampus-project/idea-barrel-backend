@@ -5,4 +5,6 @@ const statusMsg = (status, body) => {
   };
 };
 
-module.exports = { statusMsg };
+const missingDataStr = "senderId, category, title or body missing";
+
+module.exports = { statusMsg, missingDataStr };
