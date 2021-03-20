@@ -6,7 +6,7 @@ const { statusMsg, missingDataStr } = helpers;
 const { selectById } = queries;
 
 const postsCRUD = (containerId) => {
-  const getPosts = (cb) => {
+  const getAllPosts = (cb) => {
     db.getAll(containerId, (data) => {
       cb(data);
     });
@@ -49,14 +49,14 @@ const postsCRUD = (containerId) => {
   };
 
   const deletePost = (id, category, cb) => {
-    if (id) {
+    if (id && category) {
       db.deleteById(containerId, id, category, cb);
     } else {
       cb(statusMsg(400, { error: "id", input: id }));
     }
   };
 
-  return { getPosts, newPost, updatePost, getPostById, deletePost }
+  return { getAllPosts, newPost, updatePost, getPostById, deletePost };
 };
 
-export default postsCRUD;
+module.exports = { postsCRUD };

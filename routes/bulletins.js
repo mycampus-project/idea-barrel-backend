@@ -43,9 +43,10 @@ router.put("/:id", (req, res) => {
   
 });
 
-router.delete("/:id:category", (req, res) => {
+router.delete("/:id/:category", (req, res) => {
   // isAuithorized
   console.log("deleting,..");
+  console.log(req.params);
   const id = req.params.id;
   const category = req.params.category;
   deleteBulletin(id, category, (response) => {
