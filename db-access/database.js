@@ -62,6 +62,8 @@ const postToContainer = async (containerId, data, cb) => {
   }
 };
 
+// Update a post. Needs to know the id of the post, 
+// and its category (old if changed) value as its arguments.
 const updateById = async (containerId, newItem, cb) => {
   try {
     const { id, category } = newItem;

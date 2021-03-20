@@ -44,7 +44,7 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id/:category", (req, res) => {
-  // isAuithorized
+  // isAuthorized
   console.log("deleting,..");
   console.log(req.params);
   const id = req.params.id;

@@ -1,24 +1,58 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.send("ideas");
-});
+const {
+  getIdeas,
+  postIdea,
+  deleteIdea,
+  getIdeaById,
+  updateIdea,
+} = require("../db-access/ideas-db");
 
+router.get("/", (req, res) => {
+  getIdeas((response) => {
+    res.statusCode = response.status;
+    res.send(response.body);
+  });
+});
 
 router.post("/", (req, res) => {
-    
+  const idea = req.body;
+  postIdea(idea, (response) => {
+    res.statusCode = response.status;
+    res.send(response.body);
+  });
 });
 
-
-router.put("/", (req, res) => {
-    
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  getIdeaById(id, (response) => {
+    res.statusCode = response.status;
+    res.send(response.body);
+  });
 });
 
+router.put("/:id", (req, res) => {
+  // isAuthorized
+  const data = req.body;
+  updateIdea(data, (response) => {
+    res.statusCode = response.status;
+    res.send(response.body);
+  })
+  
+});
 
-router.delete("/", (req, res) => {
-    
+router.delete("/:id/:category", (req, res) => {
+  // isAuthorized
+  console.log("deleting,..");
+  console.log(req.params);
+  const id = req.params.id;
+  const category = req.params.category;
+  deleteIdea(id, category, (response) => {
+    res.statusCode = response.status;
+    res.send(response.body);
+  });
 });
 
 module.exports = router;
