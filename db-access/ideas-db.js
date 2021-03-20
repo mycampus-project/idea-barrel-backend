@@ -8,7 +8,7 @@ const { deletePost, newPost, updatePost, getPostById, getAllPosts } = postsCRUD(
     ideasContainerId
 );
 
-const getIdea = (cb) => {
+const getIdeas = (cb) => {
   getAllPosts(cb);
 };
 
@@ -29,7 +29,7 @@ const deleteIdea = (id, category, cb) => {
 };
 
 module.exports = {
-    getIdea,
+    getIdeas,
     postIdea,
     updateIdea,
     getIdeaById,

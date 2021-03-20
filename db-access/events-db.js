@@ -8,7 +8,7 @@ const { deletePost, newPost, updatePost, getPostById, getAllPosts } = postsCRUD(
   eventsContainerId
 );
 
-const getEvent = (cb) => {
+const getEvents = (cb) => {
   getAllPosts(cb);
 };
 
@@ -29,7 +29,7 @@ const deleteEvent = (id, category, cb) => {
 };
 
 module.exports = {
-    getEvent,
+    getEvents,
     postEvent,
     updateEvent,
     getEventById,

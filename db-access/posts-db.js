@@ -5,7 +5,7 @@ const db = require("./database");
 const { statusMsg, missingDataStr } = helpers;
 const { selectById } = queries;
 
-// Ever post route uses this set of functions as a base.
+// Every post route uses this set of functions as a base.
 
 // All posts should have at least a senderId, category, title and body -properties.
 // Other validation logic should happen in their own respective db modules.
@@ -32,13 +32,13 @@ const postsCRUD = (containerId) => {
   };
 
   const updatePost = (post = {}, cb) => {
-    const { senderId, category, title, body } = post || null;
-    if (senderId && category && title && body) {
+    const { senderId, category, title, body, id } = post || null;
+    if (senderId && category && title && body && id) {
       db.updateById(containerId, post, cb);
     } else {
       cb(
         statusMsg(400, {
-          error: missingDataStr,
+          error: "id, " + missingDataStr,
           input: post,
         })
       );
