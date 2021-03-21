@@ -57,7 +57,7 @@ const postsCRUD = (containerId) => {
     if (id && category) {
       db.deleteById(containerId, id, category, cb);
     } else {
-      cb(statusMsg(400, { error: "id", input: id }));
+      cb(statusMsg(400, { error: "id missing", input: id }));
     }
   };
 

@@ -52,10 +52,12 @@ const getByQuery = async (containerId, query, cb) => {
 
 // TODO: ID validity check!!!!
 const postToContainer = async (containerId, data, cb) => {
+  const date = new Date().toISOString();
+  const dataWithDate = {...data, date}
   try {
     const { resource: createdItem } = await containerById(
       containerId
-    ).items.create(data);
+    ).items.create(dataWithDate);
     cb(statusMsg(200, createdItem));
   } catch (e) {
     cb(statusMsg(400, { errorMsg: e }));
@@ -83,7 +85,7 @@ const deleteById = async (containerId, id, partitionValue, cb) => {
     const { resource: result } = await containerById(containerId)
       .item(id, partitionValue)
       .delete();
-    cb(statusMsg(200, result));
+    cb(statusMsg(200, {msg: "deleted", result: result}));
   } catch (e) {
     cb(statusMsg(400, { errorMsg: e }));
   }
