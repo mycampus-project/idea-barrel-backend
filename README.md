@@ -3,7 +3,7 @@
 
 ## Base URL: http://ibapi.mkayyeedev.ninja
 
-### Every request to the base url must contain a header field: "dev_token", and a value that is defined in the front end client assigned to that field. 
+### Every request to any url derived from the base url must contain a header field: "dev_token", and a value that is defined in the front end client assigned to that field. A request without dev_token responds with a 404.
 <br></br> 
 
 
@@ -124,4 +124,3 @@ STATUS: 400 Bad Request
     }
 }
 ```
-## Any request without "dev_token" in the headers responds with a 404.
