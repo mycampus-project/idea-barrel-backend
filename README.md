@@ -1,49 +1,49 @@
 # NodeJS Express API for Idea Barrel – connected to Azure Cosmos DB
 <br></br>
 
-# Base URL: http://ibapi.mkayyeedev.ninja
+## Base URL: http://ibapi.mkayyeedev.ninja
 
-## Every request to the base url must contain a header field: "dev_token", and a value that is defined in the front end client assigned to that field. 
+### Every request to the base url must contain a header field: "dev_token", and a value that is defined in the front end client assigned to that field. 
 <br></br> 
 
 
-# The API exposes 4 main endpoints:
+## The API exposes 4 main endpoints:
 
-## /ideas
-## /bulletins
-## /events
-## /users
+### /ideas
+### /bulletins
+### /events
+### /users
 
 #
-# With the following HTTP methods:
+## With the following HTTP methods:
 
-## **GET**
-## /ideas
-## /bulletins
-## /events
-## /users
-## /ideas/id
-## /bulletins/id
-## /events/id
-## /users/id
+### **GET**
+### /ideas
+### /bulletins
+### /events
+### /users
+### /ideas/id
+### /bulletins/id
+### /events/id
+### /users/id
 #
 
-## **POST** (Include JSON object describing the post in the body)
-## /ideas
-## /bulletins
-## /events
+### **POST** (Include JSON object describing the post in the body)
+### /ideas
+### /bulletins
+### /events
 #
 
-## **UPDATE** (Include JSON object describing the post in the body)
-## /ideas/id
-## /bulletins/id
-## /events/id
+### **UPDATE** (Include JSON object describing the post in the body)
+### /ideas/id
+### /bulletins/id
+### /events/id
 #
 
-## **DELETE**
-## /ideas/id/category
-## /bulletins/id/category
-## /events/id/category
+### **DELETE**
+### /ideas/id/category
+### /bulletins/id/category
+### /events/id/category
 
 <br></br>
 ## An example post stored into the Cosmos DB can be seen from the table below.
@@ -124,3 +124,4 @@ STATUS: 400 Bad Request
     }
 }
 ```
+## Any request without "dev_token" in the headers responds with a 404.
