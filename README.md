@@ -6,7 +6,7 @@
 ## Every request to the base url must contain a header field: "dev_token", and a value that is defined in the front end client assigned to that field. 
 <br></br> 
 
-#
+
 # The API exposes 4 main endpoints:
 
 ## /ideas
@@ -17,7 +17,7 @@
 #
 # With the following HTTP methods:
 
-## GET
+## **GET**
 ## /ideas
 ## /bulletins
 ## /events
@@ -28,39 +28,35 @@
 ## /users/id
 #
 
-## POST (Include JSON object describing the post in the body)
+## **POST** (Include JSON object describing the post in the body)
 ## /ideas
 ## /bulletins
 ## /events
 #
 
-## UPDATE (Include JSON object describing the post in the body)
+## **UPDATE** (Include JSON object describing the post in the body)
 ## /ideas/id
 ## /bulletins/id
 ## /events/id
 #
 
-## DELETE
+## **DELETE**
 ## /ideas/id/category
 ## /bulletins/id/category
 ## /events/id/category
-#
 
 <br></br>
 ## An example post stored into the Cosmos DB can be seen from the table below.
-<br></br>
 
 |senderId|title|body|category|date|id|
 |--------|-----|----|--------|----|--|
 |2325371f-8c56-40f9-a658-1f4ca6c0fa52|The greatest idea|Testing ideas from Postman|test category|2021-03-28T14:19:41.875Z|"22d4a7ad-624a-4f7e-9c7d-efff1e47c2d6"|
 
 #
-### All post request to any of the 3 CRUD endpoints (/ideas, /events, /bulletins) should have values assigned to the following four fields: <b>senderId, title, body, category</b> – as they are null-checked before any other processing. If a value is missing, a 400 response will be returned along with a JSON body, containing the given input and a reason why the request failed. In addition to the four necessary fields, you can include almost anything. Every post is automatically assigned fields for its <b>id</b>, and a <b>date</b> indicating when it was created. When a post succeeds, the server will respond with a status code 200 with a JSON object of the post in the body with the automatically added fields.
-#
+#### All post request to any of the 3 CRUD endpoints (/ideas, /events, /bulletins) should have values assigned to the following four fields: **senderId, title, body, category** – as they are null-checked before any other processing. If a value is missing, a 400 response will be returned along with a JSON body, containing the given input and a reason why the request failed. In addition to the four necessary fields, you can include almost anything. Every post is automatically assigned fields for its **id**, and a **date** indicating when it was created. When a post succeeds, the server will respond with a status code 200 with a JSON object of the post in the body with the automatically added fields.
 
 <br></br>
 ## An example post request body to http://ibapi.mkayyeedev.ninja/ideas
-#
 
 ```
 {
@@ -75,7 +71,6 @@
 }
 ```
 ## Response:
-#
 ```
 STATUS: 200 OK
 
@@ -100,7 +95,6 @@ STATUS: 200 OK
 
 
 ## An example of an invalid post request body to http://ibapi.mkayyeedev.ninja/ideas
-#
 
 ```
 {
@@ -114,7 +108,6 @@ STATUS: 200 OK
 }
 ```
 ## Response:
-#
 ```
 STATUS: 400 Bad Request
 
