@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const { upload, deleteFile } = require("../storage/storage.js");
+
 const {
   getBulletins,
   postBulletin,
@@ -25,6 +27,30 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/form", upload.single("file"), (req, res) => {
+  console.log(req.file, req.body);
+  const { userId, title, body, category } = req.body || null;
+  if (req.file) {
+    const data = {
+      userId,
+      title,
+      body,
+      category,
+      image: req.file.filename
+    }
+    postBulletin(data, (response) => {
+      res.statusCode = response.status;
+      if (response.status != 200) {
+        deleteFile(req.file.path);
+      }
+      res.send(response.body);
+    });
+  } else {
+    res.statusCode = 400;
+    res.send("File not found")
+  }
+});
+
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   getBulletinById(id, (response) => {
@@ -40,7 +66,7 @@ router.put("/:id", (req, res) => {
     res.statusCode = response.status;
     res.send(response.body);
   })
-  
+
 });
 
 router.delete("/:id/:category", (req, res) => {
