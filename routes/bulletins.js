@@ -29,10 +29,10 @@ router.post("/", (req, res) => {
 
 router.post("/form", upload.single("file"), (req, res) => {
   console.log(req.file, req.body);
-  const { userId, title, body, category } = req.body || null;
+  const { senderId, title, body, category } = req.body || null;
   if (req.file) {
     const data = {
-      userId,
+      senderId,
       title,
       body,
       category,

@@ -19,7 +19,9 @@ app.use(cors());
 
 const devApiKey = process.env.DEV_API_KEY;
 
+// Static files before authentication check... TODO: fix
 app.use("/image", express.static(__dirname + "/uploads/"));
+
 app.get("*", (req, res, next) => {
   // Ghetto authentication
   const token = req.headers.dev_token;
