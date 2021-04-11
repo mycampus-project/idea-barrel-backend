@@ -29,25 +29,27 @@ router.post("/", (req, res) => {
 
 router.post("/form", upload.single("file"), (req, res) => {
   console.log(req.file, req.body);
-  const { senderId, title, body, category } = req.body || null;
-  if (req.file) {
-    const data = {
-      senderId,
-      title,
-      body,
-      category,
-      image: req.file.filename
-    }
-    postBulletin(data, (response) => {
-      res.statusCode = response.status;
-      if (response.status != 200) {
-        deleteFile(req.file.path);
+  const { pinned } = req.body || null;
+  if (pinned !== null && pinned !== undefined) {
+    if (req.file) {
+      const data = {
+        ...req.body,
+        image: req.file.filename
       }
-      res.send(response.body);
-    });
+      postBulletin(data, (response) => {
+        res.statusCode = response.status;
+        if (response.status != 200) {
+          deleteFile(req.file.path);
+        }
+        res.send(response.body);
+      });
+    } else {
+      res.statusCode = 400;
+      res.send("File not found")
+    }
   } else {
     res.statusCode = 400;
-    res.send("File not found")
+    res.send("Pinned missing!");
   }
 });
 
