@@ -1,7 +1,7 @@
   
 name: Docker-Compose Build/Push
 
-# -> Builds and pushes docker images to a private repository for each component
+# -> Builds and pushes docker images to a private repository
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
 
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }} 
 
 jobs:
   build:
