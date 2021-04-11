@@ -34,7 +34,7 @@ router.post("/form", upload.single("file"), (req, res) => {
     if (req.file) {
       const data = {
         ...req.body,
-        pinned: !!req.body.pinned,
+        pinned: req.body.pinned == true,
         image: req.file.filename
       }
       postBulletin(data, (response) => {
