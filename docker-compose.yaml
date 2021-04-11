@@ -1,0 +1,22 @@
+services: 
+  ib-nginx:
+    image: mkayyee/ib-nginx
+    container_name: ib-nginx
+    depends_on: 
+      - ib-api
+    ports:
+      - 80:80
+      - 443:443
+    restart: on-failure
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  ib-api:
+    image: mkayyee/ib-api
+    container_name: ib-api
+    ports:
+      - 8081:8081
+    build:
+      context: ./ib-db-api
+    restart: on-failure
+
+    
