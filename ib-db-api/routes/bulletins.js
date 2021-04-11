@@ -34,6 +34,7 @@ router.post("/form", upload.single("file"), (req, res) => {
     if (req.file) {
       const data = {
         ...req.body,
+        pinned: !!req.body.pinned,
         image: req.file.filename
       }
       postBulletin(data, (response) => {
@@ -45,11 +46,11 @@ router.post("/form", upload.single("file"), (req, res) => {
       });
     } else {
       res.statusCode = 400;
-      res.send("File not found")
+      res.send({error: "File not found"})
     }
   } else {
     res.statusCode = 400;
-    res.send("Pinned missing!");
+    res.send({error: "pinned missing"});
   }
 });
 
