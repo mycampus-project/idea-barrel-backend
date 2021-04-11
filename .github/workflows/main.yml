@@ -1,0 +1,31 @@
+  
+name: Docker-Compose Build/Push
+
+# -> Builds and pushes docker images to a private repository for each component
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+env:
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+      - name: build images
+        run: |
+          docker-compose build
+      - name: push images
+        run: |
+          docker-compose push
