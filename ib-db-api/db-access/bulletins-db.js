@@ -4,7 +4,7 @@ const postsDb = require("./posts-db");
 const { bulletinsContainerId } = config;
 const { postsCRUD } = postsDb;
 
-const { deletePost, newPost, updatePost, getPostById, getAllPosts } = postsCRUD(
+const { deletePost, newPost, getPostById, getAllPosts, updatePostById } = postsCRUD(
   bulletinsContainerId
 );
 
@@ -17,7 +17,7 @@ const postBulletin = (bulletin, cb) => {
 };
 
 const updateBulletin = (bulletin, cb) => {
-  updatePost(bulletin, cb);
+  updatePostById(bulletin, cb);
 };
 
 const getBulletinById = (id, cb) => {

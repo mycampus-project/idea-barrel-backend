@@ -36,6 +36,7 @@ router.get("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   // isAuthorized
   const data = req.body;
+  data.id = req.params.id;
   updateEvent(data, (response) => {
     res.statusCode = response.status;
     res.send(response.body);

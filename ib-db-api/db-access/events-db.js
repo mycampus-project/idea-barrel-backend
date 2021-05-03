@@ -4,7 +4,7 @@ const postsDb = require("./posts-db");
 const { eventsContainerId } = config;
 const { postsCRUD } = postsDb;
 
-const { deletePost, newPost, updatePost, getPostById, getAllPosts } = postsCRUD(
+const { deletePost, newPost, updatePostById, getPostById, getAllPosts } = postsCRUD(
   eventsContainerId
 );
 
@@ -17,7 +17,7 @@ const postEvent = (event, cb) => {
 };
 
 const updateEvent = (event, cb) => {
-  updatePost(event, cb);
+  updatePostById(event, cb);
 };
 
 const getEventById = (id, cb) => {

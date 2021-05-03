@@ -4,7 +4,7 @@ const postsDb = require("./posts-db");
 const { ideasContainerId } = config;
 const { postsCRUD } = postsDb;
 
-const { deletePost, newPost, updatePost, getPostById, getAllPosts } = postsCRUD(
+const { deletePost, newPost, updatePost, getPostById, getAllPosts, updatePostById } = postsCRUD(
     ideasContainerId
 );
 
@@ -17,7 +17,7 @@ const postIdea = (idea, cb) => {
 };
 
 const updateIdea = (idea, cb) => {
-  updatePost(idea, cb);
+  updatePostById(idea, cb);
 };
 
 const getIdeaById = (id, cb) => {

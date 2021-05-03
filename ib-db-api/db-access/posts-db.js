@@ -31,6 +31,48 @@ const postsCRUD = (containerId) => {
     }
   };
 
+  const updatePostById = (post = {}, cb) => {
+    const { id } = post || null;
+    if (id) {
+      getPostById(id, (data) => {
+        const oldCategory = data?.body[0]?.category;
+        if (data && oldCategory) {
+          if (post.category && oldCategory != post.category) {
+            cb(statusMsg(400, { error: "Can not update partition value: category.\n", input: post, post_in_db: data.body[0] }));
+          } else {
+            const newPost = UpdateValues(data.body[0], post);
+            console.log(newPost);
+            db.updateById(containerId, newPost, cb)
+          }
+        } else {
+          cb(statusMsg(400, { error: "no db entries for id", input: post }));
+        }
+      });
+      //db.updateById(containerId, post, cb);
+    } else {
+      cb(
+        statusMsg(400, {
+          error: "id missing",
+          input: post,
+        })
+      );
+    }
+  };
+
+  const UpdateValues = (oldPost, newPosts) => {
+    const posts = oldPost;
+    for (key in posts) {
+      if (newPost[key]) {
+        console.log(key);
+        posts[key] = newPosts[key];
+      }
+    }
+    for (key in newPosts) {
+      posts[key] = newPosts[key];
+    }
+    return posts;
+  }
+
   const updatePost = (post = {}, cb) => {
     const { senderId, category, title, body, id } = post || null;
     if (senderId && category && title && body && id) {
@@ -61,7 +103,7 @@ const postsCRUD = (containerId) => {
     }
   };
 
-  return { getAllPosts, newPost, updatePost, getPostById, deletePost };
+  return { getAllPosts, newPost, updatePost, getPostById, deletePost, updatePostById };
 };
 
 module.exports = { postsCRUD };
