@@ -17,6 +17,8 @@ services:
   ib-api:
     image: mkayyee/ib-api
     container_name: ib-api
+    volumes:
+      - ./.env:.env
     ports:
       - 8081:8081
     restart: always
